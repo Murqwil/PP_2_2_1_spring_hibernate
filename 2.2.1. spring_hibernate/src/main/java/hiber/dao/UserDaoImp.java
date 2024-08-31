@@ -16,6 +16,7 @@ public class UserDaoImp implements UserDao {
 
    @Autowired
    private SessionFactory sessionFactory;
+   private final String query = "SELECT u FROM User u JOIN u.car c WHERE c.model = :model AND c.series = :series";
 
    @Override
    public void add(User user) {
@@ -30,8 +31,8 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   public List<User> getUserWithCar(String model, int series) {
-      String hql = "SELECT u FROM User u JOIN u.car c WHERE c.model = :model AND c.series = :series";
+   public List<User> findUserCars(String model, int series) {
+      String hql = query;
       TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
       query.setParameter("model", model);
       query.setParameter("series", series);

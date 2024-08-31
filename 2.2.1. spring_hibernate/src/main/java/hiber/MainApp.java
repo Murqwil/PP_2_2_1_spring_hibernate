@@ -44,9 +44,9 @@ public class MainApp {
             System.out.println();
         }
 
-        userService.getUserWithCar("Mercedes",2014);
-        userService.getUserWithCar("BMW",2018);
-        userService.getUserWithCar("Жигули",1995);
+        userService.findUserCars("Mercedes",2014);
+        userService.findUserCars("BMW",2018);
+        userService.findUserCars("Жигули",1995);
         context.close();
     }
 }
