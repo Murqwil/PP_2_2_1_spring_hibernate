@@ -1,5 +1,4 @@
 package hiber;
-
 import hiber.config.AppConfig;
 import hiber.model.Car;
 import hiber.model.User;
@@ -16,20 +15,20 @@ public class MainApp {
 
         UserService userService = context.getBean(UserService.class);
 
-        userService.add(new User("User1", "Lastname1", "user1@mail.ru"));
-        userService.add(new User("User2", "Lastname2", "user2@mail.ru"));
-        userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
-        userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
+        userService.addUser(new User("User1", "Lastname1", "user1@mail.ru"));
+        userService.addUser(new User("User2", "Lastname2", "user2@mail.ru"));
+        userService.addUser(new User("User3", "Lastname3", "user3@mail.ru"));
+        userService.addUser(new User("User4", "Lastname4", "user4@mail.ru"));
 
-        userService.add(new User("Name","LastName","email").
+        userService.addUser(new User("Name","LastName","email").
                 setCar(new Car("BMW",2014)));
-        userService.add(new User("Name2","LastName2","email2").
+        userService.addUser(new User("Name2","LastName2","email2").
                 setCar(new Car("Mercedes",2018)));
-        userService.add(new User("Name3","LastName3","email3").
+        userService.addUser(new User("Name3","LastName3","email3").
                 setCar(new Car("Жигули",1995)));
 
 
-        List<User> users = userService.listUsers();
+        List<User> users = userService.getUserList();
         for (User user : users) {
             System.out.println("Id = " + user.getId());
             System.out.println("First Name = " + user.getFirstName());

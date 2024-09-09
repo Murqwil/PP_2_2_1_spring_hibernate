@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import hiber.model.Car.*;
+
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -13,29 +14,29 @@ import java.util.List;
 public class UserDaoImp implements UserDao {
 
 
+    @Autowired
+    private SessionFactory sessionFactory;
 
-   @Autowired
-   private SessionFactory sessionFactory;
-   private final String query = "SELECT u FROM User u JOIN u.car c WHERE c.model = :model AND c.series = :series";
+    private static final String QUERY = "SELECT u FROM User u JOIN u.car c WHERE c.model = :model AND c.series = :series";
 
-   @Override
-   public void add(User user) {
-      sessionFactory.getCurrentSession().save(user);
-   }
+    @Override
+    public void addUser(User user) {
+        sessionFactory.getCurrentSession().save(user);
+    }
 
-   @Override
-   @SuppressWarnings("unchecked")
-   public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-      return query.getResultList();
-   }
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<User> getUserList() {
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
+        return query.getResultList();
+    }
 
-   @Override
-   public List<User> findUserCars(String model, int series) {
-      String hql = query;
-      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
-      query.setParameter("model", model);
-      query.setParameter("series", series);
-      return query.getResultList();
-   }
+    @Override
+    public List<User> findUserCars(String model, int series) {
+        String hql = QUERY;
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
+        query.setParameter("model", model);
+        query.setParameter("series", series);
+        return query.getResultList();
+    }
 }
