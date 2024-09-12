@@ -33,8 +33,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public List<User> findUserCars(String model, int series) {
-        String hql = QUERY;
-        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql, User.class);
+        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(QUERY, User.class);
         query.setParameter("model", model);
         query.setParameter("series", series);
         return query.getResultList();
